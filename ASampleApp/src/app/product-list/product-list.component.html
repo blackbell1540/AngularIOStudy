@@ -1,11 +1,11 @@
 <h2>Products</h2>
 
 <!-- Directive *ngFor : 엘리먼트를 반복 -->
-<div *ngFor="let product of products">
+<div *ngFor="let product of products; index as productId">
 
   <h3>
       <!-- property binding <a>의 title 속성에 값을 전달한다. -->
-    <a [title]="product.name + ' details'">
+    <a [title]="product.name + ' details'" [routerLink]="['/products', productId]">
       {{ product.name }}
     </a>
   </h3>
