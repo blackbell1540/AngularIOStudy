@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { products } from '../products';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from '../cart.service';
+
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -12,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
     // 앵귤러 라우터가 동작할 때 사용된 특정 라우팅 규칙을 의미한다.
     // 이 객체ㅔ에는 라우팅 규칙 자제와 라우팅 관련된 데이터가 담겨 있다.
     private route: ActivatedRoute,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -24,4 +28,8 @@ export class ProductDetailsComponent implements OnInit {
     })
   }
 
+  addToCart(product) {
+    this.cartService.addToCart(product);
+    window.alert('Your product has been added to the cart!');
+  }
 }
