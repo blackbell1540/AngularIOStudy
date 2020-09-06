@@ -43,6 +43,7 @@ export class AppModule { }
 
 ## Component
 - 클래스(데이터와 로직 처리)와 템플릿(HTML 뷰)으로 구성된다.
+- 컴포넌트는 반드시 export 해야 AppModule와 같은 다른 모듈에서 import 할 수 있습니다.
 - 컴포넌트 클래스에 @Component() 데코레이터, 메타데이터에 뷰를 함께 지정한다.
 ```
 @Component({
@@ -56,6 +57,7 @@ export class AppComponent {
 }
 ```
 - 라이프사이클 후킹함수를 이용해서 각 시점에서 필요한 동작을 실행할 수 있다.
+  - ngOnInit은 라이프싸이클 후킹 함수 입니다. Angular는 컴포넌트를 생성한 직후에 ngOnInit를 호출합니다. 그래서 컴포넌트를 초기화하는 로직은 이 메소드에 작성하는 것이 좋습니다.
 
 ### 컴포넌트 메타데이터
 - @Component 데코레이터를 붙이기 전까지 이 클래스는 컴포넌트로 등록되지도 않는다.
@@ -64,6 +66,7 @@ export class AppComponent {
   // 
   selector:    'app-hero-list',
   templateUrl: './hero-list.component.html',
+  styleUrls: ['./heroes.component.css'],
   providers:  [ HeroService ]
 })
 export class HeroListComponent implements OnInit {
@@ -73,6 +76,7 @@ export class HeroListComponent implements OnInit {
 - selector: 돔에서 이 컴포넌트의 위치를 결정한다. `<app-hero-list></app-hero-list>`라고 작성한 위치에 HeroListComponent의 인스턴스가 생성된다.
 - templateUrl: 컴포넌트의 호스트뷰를 지정한다.
 - providers: 의존석으로 주입되는 서비스를 지정
+- styleUrls: 컴포넌트에 해당하는 스타일만 따로 정의한다. 이렇게 구현하면 컴포넌트를 재사용하기 편해지며 전역 스타일이 변경되더라도 컴포넌트 스타일에 영향을 주지 않습니다. 컴포넌트에 적용되는 스타일은 @Component.styles 배열에서 인라인으로 정의할 수 있고, 여러 파일에 작성하고 @Component.styleUrls 배열로 지정할 수도 있습니다.  => ???????????
 
 ### 템플릿 문법
 #### 데이터 바인딩
@@ -147,3 +151,8 @@ Q. 문자열 바인딩에서만 사용 가능한건가??
 - 페이지 대신 뷰를 url과 매핑하는 방식이다. -> 싱글 페이지 웹이라서 실제로 새로고침되는 것은 아니고 url에 맞게 화면 내용(상태)을 바꿔주는 것이다.
 
 ![앵귤러개요](./앵귤러개요.png)
+
+# 메타데이터 (metadata)
+개발자가 만든 Angular 구성요소나 서드파티 파일, 라이브러리를 Angular가 조합할 때는 이 구성요소들에 대한 정보
+
+- 컴포넌트 클래스에 지정해야 하는 메타데이터는 @Component 데코레이터에, 애플리케이션 동작에 필요한 메타데이터는 @NgModule 데코레이터에 지정한다.
