@@ -6,3 +6,28 @@
   <span>{{ item.name }}</span>
   <span>{{ item.price | currency }}</span>
 </div>
+
+
+<!--
+  button (click) 이벤트와의 차이점이 뭘까..?
+  form (ngSubmit)="onSubmit(checkoutForm.value)
+
+  프로퍼티 바인딩과 어트리뷰트 바인딩의 차이점?
+-->
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+  <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label for="address">
+      Address
+    </label>
+    <input id="address" type="text" formControlName="address">
+  </div>
+  
+  <button class="button" type="submit">Purchase</button>
+</form>
